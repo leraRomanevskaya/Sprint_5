@@ -53,31 +53,14 @@ def main_page():
     return main_page
 
 
-@pytest.fixture  # главная страница
+@pytest.fixture  # страница регистрации
 def registration_page():
     registration_page = 'https://stellarburgers.nomoreparties.site/register'
     return registration_page
 
 
-@pytest.fixture()  # драйвер главной страницы
-def main_page_driver(main_page):
+@pytest.fixture()  # драйвер для setup и teardown браузера
+def driver():
     driver = webdriver.Chrome()
-    driver.get(main_page)
-    yield driver
-    driver.quit()
-
-
-@pytest.fixture()  # драйвер страницы регистрации
-def registration_page_driver(registration_page):
-    driver = webdriver.Chrome()
-    driver.get(registration_page)
-    yield driver
-    driver.quit()
-
-
-@pytest.fixture()  # драйвер страницы входа
-def login_page_driver(login_page):
-    driver = webdriver.Chrome()
-    driver.get(login_page)
     yield driver
     driver.quit()
